@@ -8,3 +8,13 @@ This is just some stuff thrown together to configure a private K8s instance on m
  * The Prometheus Operator &  CRDs
  * some RBAC stuff
  * The k8s UI
+
+## How?
+Run 
+ 1. The script uses [kubectx](https://github.com/ahmetb/kubectx) to switch k8s contexts
+ 1. Ensure you have a kubernetes install running.  I use the docker-desktop one on my mac
+ 1. Run `./init.sh`, which will configure everything for you, including:
+  * All k8s resources
+  * running kubectl proxy
+  * Copying the k8s-UI access-token to your clipboard
+  * Opening the k8s UI in your default browser
