@@ -3,12 +3,16 @@ kind: Deployment
 metadata:
   name: example-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: example-app
   template:
     metadata:
+#      annotations:
+#        prometheus.io/path: /metrics
+#        prometheus.io/port: '8081'
+#        prometheus.io/scrape: 'true'
       labels:
         app: example-app
     spec:
@@ -16,12 +20,16 @@ spec:
         - name: example-app
           image: fabxc/instrumented_app
           ports:
-            - name: web
-              containerPort: 8080
+            - name: wab
+              containerPort: 9090
 ---
 kind: Service
 apiVersion: v1
 metadata:
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '8080'
+    prometheus.io/scrape: 'true'
   name: example-app
   labels:
     app: example-app
@@ -29,5 +37,5 @@ spec:
   selector:
     app: example-app
   ports:
-    - name: web
-      port: 8080
+    - name: wab
+      port: 8085

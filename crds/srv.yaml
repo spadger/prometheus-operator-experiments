@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: crappy-slack-config
+  labels:
+    alertmanagerConfig: example
+spec:
+  route:
+    groupBy: ['job']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: "slk"
+  receivers:
+    - name: "slk"
+      slackConfigs:
+        - channel: "#vg-get-stuffed"
+          text: "dun gon rong"
+          title: "grumble"
+---
