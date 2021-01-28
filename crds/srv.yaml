@@ -10,9 +10,9 @@ spec:
     groupWait: 30s
     groupInterval: 5m
     repeatInterval: 12h
-    receiver: "slk"
+    receiver: "slack"
   receivers:
-    - name: "slk"
+    - name: "slack"
       slackConfigs:
         - channel: "#vg-get-stuffed"
           text: "dun gon rong"

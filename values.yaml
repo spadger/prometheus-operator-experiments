@@ -455,16 +455,14 @@ alertmanager:
     ## Storage is the definition of how storage will be used by the Alertmanager instances.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/storage.md
     ##
-    storage: {}
-    # volumeClaimTemplate:
-    #   spec:
-    #     storageClassName: gluster
-    #     accessModes: ["ReadWriteOnce"]
-    #     resources:
-    #       requests:
-    #         storage: 50Gi
-    #   selector: {}
-
+#    storage:
+#      volumeClaimTemplate:
+#        spec:
+#          storageClassName: local-prom-storage
+#          accessModes: ["ReadWriteOnce"]
+#          resources:
+#            requests:
+#              storage: 5Gi
 
     ## 	The external URL the Alertmanager instances will be available under. This is necessary to generate correct URLs. This is necessary if Alertmanager is not served from root of a DNS name.	string	false
     ##
@@ -487,16 +485,18 @@ alertmanager:
     ## Define resources requests and limits for single Pods.
     ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
     ##
-    resources: {}
-    # requests:
-    #   memory: 400Mi
+    resources:
+      requests:
+        memory: 400Mi
+      limits:
+        memory: 1Gi
 
     ## Pod anti-affinity can prevent the scheduler from placing Prometheus replicas on the same node.
     ## The default value "soft" means that the scheduler should *prefer* to not schedule two replica pods onto the same node but no guarantee is provided.
     ## The value "hard" means that the scheduler is *required* to not schedule two replica pods onto the same node.
     ## The value "" will disable pod anti-affinity so that no anti-affinity rules will be configured.
     ##
-    podAntiAffinity: ""
+    podAntiAffinity: "soft"
 
     ## If anti-affinity is enabled sets the topologyKey to use for anti-affinity.
     ## This can be changed to, for example, failure-domain.beta.kubernetes.io/zone
@@ -1964,14 +1964,13 @@ prometheus:
     storageSpec: {}
     ## Using PersistentVolumeClaim
     ##
-    #  volumeClaimTemplate:
-    #    spec:
-    #      storageClassName: gluster
-    #      accessModes: ["ReadWriteOnce"]
-    #      resources:
-    #        requests:
-    #          storage: 50Gi
-    #    selector: {}
+    #      volumeClaimTemplate:
+    #        spec:
+    #          storageClassName: local-prom-storage
+    #          accessModes: ["ReadWriteOnce"]
+    #          resources:
+    #            requests:
+    #              storage: 5Gi
 
     ## Using tmpfs volume
     ##

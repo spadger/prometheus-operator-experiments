@@ -1,5 +1,11 @@
 #kubectx docker-desktop
 
+#Storage
+echo "Configuring Storage..."
+mkdir -p /tmp/k8s-pv/prometheus
+kubectl apply -f storage.yaml
+echo "Configuring Storage - done!"
+
 # Apps
 echo "Deploying apps..."
 kubectl create namespace apps
